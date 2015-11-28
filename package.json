@@ -1,0 +1,32 @@
+{
+  "name": "HackNotts2015",
+  "contributors": [
+    {
+      "name": "Andrei Muntean",
+      "email": "andrei.muntean.dev@gmail.com"
+    },
+    {
+      "name": "Diana Bite",
+      "email": "diana.bite@hotmail.com"
+    },
+    {
+      "name": "Geanina Hinta",
+      "email": "geaninahinta@yahoo.com"
+    },
+    {
+      "name": "Octavian Ionut",
+      "email": "octionut@gmail.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreimuntean/HackNotts2015"
+  },
+  "dependencies": {
+    "body-parser": "*",
+    "express": "*",
+    "http": "*"
+  },
+  "private": true,
+  "license": "MIT"
+}
