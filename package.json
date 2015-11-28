@@ -24,8 +24,7 @@
   },
   "dependencies": {
     "body-parser": "*",
-    "express": "*",
-    "http": "*"
+    "express": "*"
   },
   "private": true,
   "license": "MIT"
