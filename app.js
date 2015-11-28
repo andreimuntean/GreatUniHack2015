@@ -32,8 +32,12 @@ app.post('/users', function(req, res) {
     // Creates a new user.
     var user = req.body;
 
-    databaseService.createUser(user);
-    res.end("OK");
+    try {
+        databaseService.createUser(user);
+        res.end('OK');
+    } catch (error) {
+        res.end(error);
+    }
 });
 
 app.post('/login', function(req, res) {
@@ -41,16 +45,24 @@ app.post('/login', function(req, res) {
     var username = req.body.username;
     var password = req.body.password;
 
-    databaseService.login(username, password);
-    res.end("OK");
+    try {
+        databaseService.login(username, password);
+        res.end('OK');
+    } catch (error) {
+        res.end(error);
+    }
 });
 
 app.post('/logout', function(req, res) {
     // Signs a user out.
     var token = req.body.token;
 
-    databaseService.logout(token);
-    res.end("OK");
+    try {
+        databaseService.logout(token);
+        res.end('OK');
+    } catch (error) {
+        res.end(error);
+    }
 });
 
 app.get('/dares', function(req, res) {

@@ -14,7 +14,7 @@ module.exports = {
         try {
             // ...
             return 'token';
-        } catch(error) {
+        } catch (error) {
             throw 400;
         }
     },
@@ -30,7 +30,7 @@ module.exports = {
     logout: function(token) {
         try {
             // ...
-        } catch(error) {
+        } catch (error) {
             throw 400;
         }
     },
