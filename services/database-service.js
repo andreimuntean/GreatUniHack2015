@@ -1,49 +1,67 @@
-module.exports = {
-    getUsers: function() {
-        return [];
-    },
-    getUser: function(username) {
-        return {};
-    },
-    createUser: function(user) {
-        // Determines whether the user already exists:
-        if (getUser(username)) {
-            throw 409;
-        }
+var getUsers = function() {
+    return [];
+};
 
-        try {
-            // ...
-            return 'token';
-        } catch (error) {
-            throw 400;
-        }
-    },
-    login: function(username, password) {
-        // Determines whether the login details are wrong:
-        throw 401;
+var getUser = function(username) {
+    return {};
+};
 
-        // If login failed:
-        throw 400;
-
-        return 'token';
-    },
-    logout: function(token) {
-        try {
-            // ...
-        } catch (error) {
-            throw 400;
-        }
-    },
-    getDares: function() {
-        return [];
-    },
-    getDare: function(id) {
-        return {};
-    },
-    getReceivedDares: function(username) {
-        return [];
-    },
-    getSentDares: function(username) {
-        return [];
+var createUser = function(user) {
+    // Determines whether the user already exists:
+    if (getUser(user.username)) {
+        throw new Error('409');
     }
+
+    try {
+        // ...
+        return 'token';
+    } catch (error) {
+        throw new Error('400');
+    }
+};
+
+var login = function(username, password) {
+    // Determines whether the login details are wrong:
+    throw new Error('401');
+
+    // If login failed:
+    throw new Error('400');
+
+    return 'token';
+};
+
+var logout = function(token) {
+    try {
+        // ...
+    } catch (error) {
+        throw new Error('400');
+    }
+};
+
+var getDares = function() {
+    return [];
+};
+
+var getDare = function(id) {
+    return {};
+};
+
+var getReceivedDares = function(username) {
+    return [];
+};
+
+var getSentDares = function(username) {
+    return [];
+};
+
+module.exports = {
+    getUsers: getUsers,
+    getUser: getUser,
+    createUser: createUser,
+    login: login,
+    logout: logout,
+    getDares: getDares,
+    getDare: getDare,
+    getReceivedDares: getReceivedDares,
+    getSentDares: getSentDares
 };

@@ -36,7 +36,8 @@ app.post('/users', function(req, res) {
         databaseService.createUser(user);
         res.end('OK');
     } catch (error) {
-        res.end(error);
+        res.status(error.message);
+        res.end('Error');
     }
 });
 
@@ -49,7 +50,8 @@ app.post('/login', function(req, res) {
         databaseService.login(username, password);
         res.end('OK');
     } catch (error) {
-        res.end(error);
+        res.status(error.message);
+        res.end('Error');
     }
 });
 
@@ -61,7 +63,8 @@ app.post('/logout', function(req, res) {
         databaseService.logout(token);
         res.end('OK');
     } catch (error) {
-        res.end(error);
+        res.status(error.message);
+        res.end('Error');
     }
 });
 
