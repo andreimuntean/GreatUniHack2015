@@ -14,7 +14,6 @@ var createUser = function(user) {
 
     try {
         // ...
-        return 'token';
     } catch (error) {
         throw new Error('400');
     }
