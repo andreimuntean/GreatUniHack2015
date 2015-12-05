@@ -14,16 +14,28 @@ app.set('json spaces', 4);
 var databaseService = require('./services/database-service');
 var justGivingService = require('./services/just-giving-service');
 
+var sendResponse = function(res, data, statusCode) {
+    if (!statusCode) {
+        statusCode = 200;
+    } else {
+        res.status(statusCode);
+    }
+
+    res.json({
+        'status': statusCode == 200 ? 'success' : 'error',
+        'data': data
+    });
+};
+
 app.get('/users', function(req, res) {
     // Gets the list of users.
     try {
         var users = databaseService.getUsers();
         
-        res.json(users);
+        sendResponse(res, users);
 
     } catch (error) {
-        res.status(error.message);
-        res.end('An error has occurred.');
+        sendResponse(res, null, error.message);
     }
 });
 
@@ -34,10 +46,9 @@ app.get('/users/:username', function(req, res) {
     try {
         var user = databaseService.getUser(username);
 
-        res.json(user);
+        sendResponse(res, user);
     } catch (error) {
-        res.status(error.message);
-        res.end('An error has occurred.');
+        sendResponse(res, null, error.message);
     }
 });
 
@@ -52,10 +63,9 @@ app.get('/users/:username/:password/:email', function(req, res) {
 
     try {
         databaseService.createUser(user);
-        res.end('');
+        sendResponse(res);
     } catch (error) {
-        res.status(error.message);
-        res.end('An error has occurred.');
+        sendResponse(res, null, error.message);
     }
 });
 
@@ -68,10 +78,9 @@ app.get('/login/:username/:password', function(req, res) {
     try {
         var token = databaseService.login(username, password);
 
-        res.json({ 'token': token });
+        sendResponse(res, { 'token': token });
     } catch (error) {
-        res.status(error.message);
-        res.end('An error has occurred.');
+        sendResponse(res, null, error.message);
     }
 });
 
@@ -81,10 +90,9 @@ app.post('/logout', function(req, res) {
 
     try {
         databaseService.logout(token);
-        res.end('OK');
+        sendResponse(res);
     } catch (error) {
-        res.status(error.message);
-        res.end('An error has occurred.');
+        sendResponse(res, null, error.message);
     }
 });
 
@@ -93,10 +101,9 @@ app.get('/dares', function(req, res) {
     try {
         var dares = databaseService.getDares();
 
-        res.json(dares);
+        sendResponse(res, dares);
     } catch (error) {
-        res.status(error.message);
-        res.end('An error has occurred.');
+        sendResponse(res, null, error.message);
     }
 });
 
@@ -107,10 +114,9 @@ app.get('/dares/:id', function(req, res) {
     try {
         var dare = databaseService.getDare(id);
 
-        res.json(dare);
+        sendResponse(res, dare);
     } catch (error) {
-        res.status(error.message);
-        res.end('An error has occurred.');
+        sendResponse(res, null, error.message);
     }
 });
 
@@ -121,10 +127,9 @@ app.get('/users/:username/received-dares', function(req, res) {
     try {
         var receivedDares = databaseService.getReceivedDares(username);
 
-        res.json(receivedDares);
+        sendResponse(res, receivedDares);
     } catch (error) {
-        res.status(error.message);
-        res.end('An error has occurred.');
+        sendResponse(res, null, error.message);
     }
 });
 
@@ -135,29 +140,26 @@ app.get('/users/:username/sent-dares', function(req, res) {
     try {
         var sentDares = databaseService.getSentDares(username);
 
-        res.json(sentDares);
+        sendResponse(res, sentDares);
     } catch (error) {
-        res.status(error.message);
-        res.end('An error has occurred.');
+        sendResponse(res, null, error.message);
     }
 });
 
 app.get('/users/:receiverUsername/:dareId/:senderUsername/:causeId/:amount', function(req, res) {
     // Dares a user.
     var userDare = {
-        "dareId": req.params.dareId,
-        "senderUsername": req.params.senderUsername,
-        "receiverUsername": req.params.receiverUsername,
-        "causeId": req.params.causeId,
-        "amount": req.params.amount
+        'dareId': req.params.dareId,
+        'senderUsername': req.params.senderUsername,
+        'receiverUsername': req.params.receiverUsername,
+        'causeId': req.params.causeId,
+        'amount': req.params.amount
     };
 
     try {
-        databaseService.dareUser(userDare);
-        res.end('');
+        sendResponse(res, userDare);
     } catch (error) {
-        res.status(error.message);
-        res.end('An error has occurred.');
+        sendResponse(res, null, error.message);
     }
 });
 
@@ -166,11 +168,10 @@ app.get('/causes', function(req, res) {
     try {
         var causes = justGivingService.getCauses();
         
-        res.json(causes);
+        sendResponse(res, causes);
 
     } catch (error) {
-        res.status(error.message);
-        res.end('An error has occurred.');
+        sendResponse(res, null, error.message);
     }
 });
 
@@ -181,11 +182,10 @@ app.get('/causes/:id', function(req, res) {
     try {
         var cause = justGivingService.getCause(id);
         
-        res.json(cause);
+        sendResponse(res, cause);
 
     } catch (error) {
-        res.status(error.message);
-        res.end('An error has occurred.');
+        sendResponse(res, null, error.message);
     }
 });
 
