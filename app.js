@@ -10,43 +10,21 @@ app.locals.basedir = __dirname;
 // Makes json objects prettier.
 app.set('json spaces', 4);
 
-// Instantiates the services.
+// Instantiates the services and helpers.
 var contactService = require('./services/contact-service');
 var databaseService = require('./services/database-service');
 var justGivingService = require('./services/just-giving-service');
-
-var sendResponse = function(res, data, statusCode) {
-    if (!statusCode) {
-        statusCode = 200;
-    } else {
-        res.status(statusCode);
-    }
-
-    res.json({
-        'status': statusCode == 200 ? 'success' : 'error',
-        'data': data
-    });
-};
+var responseHelper = require('./helpers/response-helper');
 
 app.get('/users', function(req, res) {
-    databaseService.getUsers(function(users) {
-        sendResponse(res, users);
-    }, function(error) {
-        sendResponse(res, null, error.message);
-    });
+    databaseService.getUsers(res);
 });
 
 app.get('/users/:username', function(req, res) {
     // Gets the specified user.
     var username = req.params.username;
 
-    try {
-        var user = databaseService.getUser(username);
-
-        sendResponse(res, user);
-    } catch (error) {
-        sendResponse(res, null, error.message);
-    }
+    databaseService.getUser(res, username);
 });
 
 // @TO-DO: Change to POST and fix security issues.
@@ -60,9 +38,9 @@ app.get('/users/:username/:password/:email', function(req, res) {
 
     try {
         databaseService.createUser(user);
-        sendResponse(res);
+        responseHelper.sendResponse(res);
     } catch (error) {
-        sendResponse(res, null, error.message);
+        responseHelper.sendResponse(res, null, error.message);
     }
 });
 
@@ -72,25 +50,14 @@ app.get('/login/:username/:password', function(req, res) {
     var username = req.params.username;
     var password = req.params.password;
 
-    try {
-        var token = databaseService.login(username, password);
-
-        sendResponse(res, { 'token': token });
-    } catch (error) {
-        sendResponse(res, null, error.message);
-    }
+    databaseService.login(res, username, password);
 });
 
 app.post('/logout', function(req, res) {
     // Signs a user out.
     var token = req.body.token;
 
-    try {
-        databaseService.logout(token);
-        sendResponse(res);
-    } catch (error) {
-        sendResponse(res, null, error.message);
-    }
+    databaseService.logout(res, token);
 });
 
 app.get('/dares', function(req, res) {
@@ -98,9 +65,9 @@ app.get('/dares', function(req, res) {
     try {
         var dares = databaseService.getDares();
 
-        sendResponse(res, dares);
+        responseHelper.sendResponse(res, dares);
     } catch (error) {
-        sendResponse(res, null, error.message);
+        responseHelper.sendResponse(res, null, error.message);
     }
 });
 
@@ -124,9 +91,9 @@ app.get('/users/:username/received-dares', function(req, res) {
     try {
         var receivedDares = databaseService.getReceivedDares(username);
 
-        sendResponse(res, receivedDares);
+        responseHelper.sendResponse(res, receivedDares);
     } catch (error) {
-        sendResponse(res, null, error.message);
+        responseHelper.sendResponse(res, null, error.message);
     }
 });
 
@@ -137,9 +104,9 @@ app.get('/users/:username/sent-dares', function(req, res) {
     try {
         var sentDares = databaseService.getSentDares(username);
 
-        sendResponse(res, sentDares);
+        responseHelper.sendResponse(res, sentDares);
     } catch (error) {
-        sendResponse(res, null, error.message);
+        responseHelper.sendResponse(res, null, error.message);
     }
 });
 
@@ -165,9 +132,9 @@ app.get('/users/:receiverUsername/:dareId/:senderUsername/:causeId/:amount', fun
             'You have just been challenged by ' + sender.username + '!'
             + ' Log into http://hi-dare.com/ to see your challenges.');
 
-        sendResponse(res, userDare);
+        responseHelper.sendResponse(res, userDare);
     } catch (error) {
-        sendResponse(res, null, error.message);
+        responseHelper.sendResponse(res, null, error.message);
     }
 });
 
@@ -176,10 +143,10 @@ app.get('/causes', function(req, res) {
     try {
         var causes = justGivingService.getCauses();
         
-        sendResponse(res, causes);
+        responseHelper.sendResponse(res, causes);
 
     } catch (error) {
-        sendResponse(res, null, error.message);
+        responseHelper.sendResponse(res, null, error.message);
     }
 });
 
@@ -190,10 +157,10 @@ app.get('/causes/:id', function(req, res) {
     try {
         var cause = justGivingService.getCause(id);
         
-        sendResponse(res, cause);
+        responseHelper.sendResponse(res, cause);
 
     } catch (error) {
-        sendResponse(res, null, error.message);
+        responseHelper.sendResponse(res, null, error.message);
     }
 });
 

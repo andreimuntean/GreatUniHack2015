@@ -1,5 +1,8 @@
 var mysql = require('mysql');
 
+// Instantiates the services and helpers.
+var responseHelper = require('../helpers/response-helper');
+
 // Connects to the database.
 var connection = mysql.createConnection({
     host: process.env.DATABASE_HOST,
@@ -9,10 +12,12 @@ var connection = mysql.createConnection({
     database: process.env.DATABASE_NAME
 });
 
-var getUsers = function(responseHandler, errorHandler) {
-    connection.query('select * from Users', function(error, result) {
+var getUsers = function(res) {
+    var query = 'select * from Users';
+
+    connection.query(query, function(error, result) {
         if (error) {
-            errorHandler(error);
+            responseHelper.sendResponse(res, null, 500);
 
             return;
         }
@@ -23,15 +28,34 @@ var getUsers = function(responseHandler, errorHandler) {
             users.add(user);
         }
 
-        responseHandler(users);
+        responseHelper.sendResponse(res, users);
     });
 };
 
-var getUser = function(username) {
-    return {};
+var getUser = function(res, username) {
+    var query = 'select * from Users where Username ="' + username + '"';
+
+    connection.query(query, function(error, result) {
+        if (error) {
+            responseHelper.sendResponse(res, null, 500);
+
+            return;
+        }
+
+        // Determines whether a user with the specified username exists.
+        if (result.length == 0) {
+            responseHelper.sendResponse(res, null, 404);
+
+            return;
+        }
+
+        var user = result[0];
+
+        responseHelper.sendResponse(res, user);
+    });
 };
 
-var createUser = function(user) {
+var createUser = function(responseHandler, errorHandler, user) {
     // Determines whether the user already exists.
     if (getUser(user.username)) {
         throw new Error('409');
@@ -44,22 +68,32 @@ var createUser = function(user) {
     }
 };
 
-var login = function(username, password) {
-    // Determines whether the login details are wrong.
-    throw new Error('401');
+var login = function(res, username, password) {
+    var query = 'select * from Users where Username ="' + username + '" and Password = "' + password + '"';
 
-    // If login failed.
-    throw new Error('400');
+    connection.query(query, function(error, result) {
+        if (error) {
+            sendResponse(res, null, 500);
 
-    return 'token';
+            return;
+        }
+
+        // Determines whether a user with the specified username and password exists.
+        if (result.length == 0) {
+            sendResponse(res, null, 401);
+
+            return;
+        }
+
+        var user = result[0];
+
+        sendResponse(res, { 'token': '' });
+    });
 };
 
-var logout = function(token) {
-    try {
-        // ...
-    } catch (error) {
-        throw new Error('400');
-    }
+var logout = function(res, token) {
+    // @TO-DO: Implement the method.
+    responseHelper.sendResponse(res, null, 500);
 };
 
 var getDares = function() {
