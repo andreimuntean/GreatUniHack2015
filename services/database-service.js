@@ -1,9 +1,11 @@
+var mysql = require('mysql');
+
 var getUsers = function() {
     return [];
 };
 
 var getUser = function(username) {
-    throw new Error('400');
+    return {};
 };
 
 var createUser = function(user) {

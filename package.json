@@ -24,7 +24,9 @@
   },
   "dependencies": {
     "body-parser": "*",
-    "express": "*"
+    "express": "*",
+    "justgiving-apiclient": "*",
+    "mysql": "*"
   },
   "private": true,
   "license": "MIT"

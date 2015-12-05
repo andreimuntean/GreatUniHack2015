@@ -12,6 +12,7 @@ app.set('json spaces', 4);
 
 // Instantiates the services.
 var databaseService = require('./services/database-service');
+var justGivingService = require('./services/just-giving-service');
 
 app.get('/users', function(req, res) {
     // Gets the list of users.
@@ -154,6 +155,34 @@ app.get('/users/:receiverUsername/:dareId/:senderUsername/:causeId/:amount', fun
     try {
         databaseService.dareUser(userDare);
         res.end('');
+    } catch (error) {
+        res.status(error.message);
+        res.end('An error has occurred.');
+    }
+});
+
+app.get('/causes', function(req, res) {
+    // Gets the causes.
+    try {
+        var causes = justGivingService.getCauses();
+        
+        res.json(causes);
+
+    } catch (error) {
+        res.status(error.message);
+        res.end('An error has occurred.');
+    }
+});
+
+app.get('/causes/:id', function(req, res) {
+    // Gets the specified cause.
+    var id = req.params.id;
+
+    try {
+        var cause = justGivingService.getCause(id);
+        
+        res.json(cause);
+
     } catch (error) {
         res.status(error.message);
         res.end('An error has occurred.');
