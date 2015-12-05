@@ -53,6 +53,14 @@ var getSentDares = function(username) {
     return [];
 };
 
+var dareUser = function(userDare) {
+    try {
+        // ...
+    } catch (error) {
+        throw new Error('400');
+    }
+}
+
 module.exports = {
     getUsers: getUsers,
     getUser: getUser,
@@ -62,5 +70,6 @@ module.exports = {
     getDares: getDares,
     getDare: getDare,
     getReceivedDares: getReceivedDares,
-    getSentDares: getSentDares
+    getSentDares: getSentDares,
+    dareUser: dareUser
 };
