@@ -29,15 +29,11 @@ var sendResponse = function(res, data, statusCode) {
 };
 
 app.get('/users', function(req, res) {
-    // Gets the list of users.
-    try {
-        var users = databaseService.getUsers();
-        
+    databaseService.getUsers(function(users) {
         sendResponse(res, users);
-
-    } catch (error) {
+    }, function(error) {
         sendResponse(res, null, error.message);
-    }
+    });
 });
 
 app.get('/users/:username', function(req, res) {

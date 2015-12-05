@@ -1,7 +1,30 @@
 var mysql = require('mysql');
 
-var getUsers = function() {
-    return [];
+// Connects to the database.
+var connection = mysql.createConnection({
+    host: process.env.DATABASE_HOST,
+    port: process.env.DATABASE_PORT,
+    user: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASSWORD,
+    database: process.env.DATABASE_NAME
+});
+
+var getUsers = function(responseHandler, errorHandler) {
+    connection.query('select * from Users', function(error, result) {
+        if (error) {
+            errorHandler(error);
+
+            return;
+        }
+
+        var users = [];
+
+        for (user in result) {
+            users.add(user);
+        }
+
+        responseHandler(users);
+    });
 };
 
 var getUser = function(username) {
