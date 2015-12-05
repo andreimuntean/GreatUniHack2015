@@ -25,7 +25,7 @@ var getUsers = function(res) {
         var users = [];
 
         for (user in result) {
-            users.add(user);
+            users.push(user);
         }
 
         responseHelper.sendResponse(res, users);
