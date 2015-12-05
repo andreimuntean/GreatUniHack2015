@@ -1,26 +1,26 @@
 {
-  "name": "HackNotts2015",
+  "name": "GreatUniHack2015",
   "contributors": [
     {
       "name": "Andrei Muntean",
       "email": "andrei.muntean.dev@gmail.com"
     },
     {
-      "name": "Diana Bite",
-      "email": "diana.bite@hotmail.com"
+      "name": "Dragos Alex Radu",
+      "email": "alex.radu.1000@gmail.com"
     },
     {
       "name": "Geanina Hinta",
       "email": "geaninahinta@yahoo.com"
     },
     {
-      "name": "Octavian Ionut",
-      "email": "octionut@gmail.com"
+      "name": "Alexandra Misca",
+      "email": "m.alexandra26@ymail.com"
     }
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/andreimuntean/HackNotts2015"
+    "url": "https://github.com/andreimuntean/GreatUniHack2015"
   },
   "dependencies": {
     "body-parser": "*",
