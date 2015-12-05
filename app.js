@@ -36,12 +36,7 @@ app.get('/users/:username/:password/:email', function(req, res) {
         'email': req.params.email
     };
 
-    try {
-        databaseService.createUser(user);
-        responseHelper.sendResponse(res);
-    } catch (error) {
-        responseHelper.sendResponse(res, null, error.message);
-    }
+    databaseService.createUser(res, user);
 });
 
 // @TO-DO: Change to POST and fix security issues.

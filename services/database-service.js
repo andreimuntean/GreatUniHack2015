@@ -55,17 +55,20 @@ var getUser = function(res, username) {
     });
 };
 
-var createUser = function(responseHandler, errorHandler, user) {
-    // Determines whether the user already exists.
-    if (getUser(user.username)) {
-        throw new Error('409');
-    }
+var createUser = function(res, user) {
+    var query = 'insert into Users (Username, Email, Password) VALUES('
+        + '"' + user.username + '", "' + user.email + '", "' + user.password + '")';
 
-    try {
-        // ...
-    } catch (error) {
-        throw new Error('400');
-    }
+    connection.query(query, function(error, result) {
+        if (error) {
+            // A user with this username already exists.
+            responseHelper.sendResponse(res, null, 409);
+
+            return;
+        }
+
+        responseHelper.sendResponse(res);
+    });
 };
 
 var login = function(res, username, password) {
@@ -73,21 +76,21 @@ var login = function(res, username, password) {
 
     connection.query(query, function(error, result) {
         if (error) {
-            sendResponse(res, null, 500);
+            responseHelper.sendResponse(res, null, 500);
 
             return;
         }
 
         // Determines whether a user with the specified username and password exists.
         if (result.length == 0) {
-            sendResponse(res, null, 401);
+            responseHelper.sendResponse(res, null, 401);
 
             return;
         }
 
         var user = result[0];
 
-        sendResponse(res, { 'token': '' });
+        responseHelper.sendResponse(res, { 'token': '' });
     });
 };
 
