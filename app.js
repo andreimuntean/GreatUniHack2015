@@ -11,6 +11,7 @@ app.locals.basedir = __dirname;
 app.set('json spaces', 4);
 
 // Instantiates the services.
+var contactService = require('./services/contact-service');
 var databaseService = require('./services/database-service');
 var justGivingService = require('./services/just-giving-service');
 
@@ -157,6 +158,17 @@ app.get('/users/:receiverUsername/:dareId/:senderUsername/:causeId/:amount', fun
     };
 
     try {
+        databaseService.dareUser(userDare);
+
+        // Gets the challenger and challengee.
+        var sender = databaseService.getUser(senderUsername);
+        var receiver = databaseService.getUser(receiverUsername);
+
+        // Sends an email to the challengee.
+        contactService.sendEmail(receiver.email, 'You have been challenged!',
+            'You have just been challenged by ' + sender.username + '!'
+            + ' Log into http://hi-dare.com/ to see your challenges.');
+
         sendResponse(res, userDare);
     } catch (error) {
         sendResponse(res, null, error.message);

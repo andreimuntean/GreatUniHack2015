@@ -26,7 +26,8 @@
     "body-parser": "*",
     "express": "*",
     "justgiving-apiclient": "*",
-    "mysql": "*"
+    "mysql": "*",
+    "sendgrid": "*"
   },
   "private": true,
   "license": "MIT"
