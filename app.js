@@ -22,6 +22,7 @@ app.get('/users', function(req, res) {
 
     } catch (error) {
         res.status(error.message);
+        res.end('An error has occurred.');
     }
 });
 
@@ -35,6 +36,7 @@ app.get('/users/:username', function(req, res) {
         res.json(user);
     } catch (error) {
         res.status(error.message);
+        res.end('An error has occurred.');
     }
 });
 
@@ -42,15 +44,17 @@ app.get('/users/:username', function(req, res) {
 app.get('/users/:username/:password/:email', function(req, res) {
     // Creates a new user.
     var user = {
-        "username": req.params.username,
-        "password": req.params.password,
-        "email": req.params.email
+        'username': req.params.username,
+        'password': req.params.password,
+        'email': req.params.email
     };
 
     try {
         databaseService.createUser(user);
+        res.end('');
     } catch (error) {
         res.status(error.message);
+        res.end('An error has occurred.');
     }
 });
 
@@ -61,9 +65,12 @@ app.get('/login/:username/:password', function(req, res) {
     var password = req.params.password;
 
     try {
-        databaseService.login(username, password);
+        var token = databaseService.login(username, password);
+
+        res.json({ 'token': token });
     } catch (error) {
         res.status(error.message);
+        res.end('An error has occurred.');
     }
 });
 
@@ -76,7 +83,7 @@ app.post('/logout', function(req, res) {
         res.end('OK');
     } catch (error) {
         res.status(error.message);
-        res.end('Error');
+        res.end('An error has occurred.');
     }
 });
 
@@ -88,6 +95,7 @@ app.get('/dares', function(req, res) {
         res.json(dares);
     } catch (error) {
         res.status(error.message);
+        res.end('An error has occurred.');
     }
 });
 
@@ -101,6 +109,7 @@ app.get('/dares/:id', function(req, res) {
         res.json(dare);
     } catch (error) {
         res.status(error.message);
+        res.end('An error has occurred.');
     }
 });
 
@@ -114,6 +123,7 @@ app.get('/users/:username/received-dares', function(req, res) {
         res.json(receivedDares);
     } catch (error) {
         res.status(error.message);
+        res.end('An error has occurred.');
     }
 });
 
@@ -127,6 +137,7 @@ app.get('/users/:username/sent-dares', function(req, res) {
         res.json(sentDares);
     } catch (error) {
         res.status(error.message);
+        res.end('An error has occurred.');
     }
 });
 
@@ -142,8 +153,10 @@ app.get('/users/:receiverUsername/:dareId/:senderUsername/:causeId/:amount', fun
 
     try {
         databaseService.dareUser(userDare);
+        res.end('');
     } catch (error) {
         res.status(error.message);
+        res.end('An error has occurred.');
     }
 });
 

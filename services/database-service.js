@@ -3,11 +3,11 @@ var getUsers = function() {
 };
 
 var getUser = function(username) {
-    return {};
+    throw new Error('400');
 };
 
 var createUser = function(user) {
-    // Determines whether the user already exists:
+    // Determines whether the user already exists.
     if (getUser(user.username)) {
         throw new Error('409');
     }
@@ -20,10 +20,10 @@ var createUser = function(user) {
 };
 
 var login = function(username, password) {
-    // Determines whether the login details are wrong:
+    // Determines whether the login details are wrong.
     throw new Error('401');
 
-    // If login failed:
+    // If login failed.
     throw new Error('400');
 
     return 'token';
