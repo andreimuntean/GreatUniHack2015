@@ -51,7 +51,11 @@ var login = function(callback, email, password) {
 };
 
 var logout = function(callback, token) {
-    callback(null);
+    var query = 'update Users set Token = "" where Token ="' + token + '"';
+
+    client.query(query, function(error, result) {
+        callback(error);
+    });
 };
 
 var getDares = function(callback) {
@@ -173,7 +177,23 @@ var dareUser = function(callback, userDare) {
     client.query(query, function(error, result) {
         callback(error);
     });
-}
+};
+
+var updateEvidence = function(callback, id, value) {
+    var query = 'update Dares set Evidence = "' + value + '" where Id =' + id;
+
+    client.query(query, function(error, result) {
+        callback(error);
+    });
+};
+
+var updateStatus = function(callback, id, value) {
+    var query = 'update Dares set Status = ' + value + ' where Id =' + id;
+
+    client.query(query, function(error, result) {
+        callback(error);
+    });
+};
 
 module.exports = {
     getUsers: getUsers,
@@ -188,5 +208,7 @@ module.exports = {
     getActiveDares: getActiveDares,
     getPendingDares: getPendingDares,
     getCompletedDares: getCompletedDares,
-    dareUser: dareUser
+    dareUser: dareUser,
+    updateEvidence: updateEvidence,
+    updateStatus: updateStatus
 };

@@ -99,7 +99,13 @@ app.post('/logout', function(req, res) {
     var token = req.body.token;
 
     databaseService.logout(function(error) {
-        responseHelper.sendResponse(res, null, 500);
+        if (error) {
+            responseHelper.sendResponse(res, null, 500);
+
+            return;
+        }
+
+        responseHelper.sendResponse(res);
     }, token);
 });
 
@@ -229,6 +235,38 @@ app.get('/users/:receiverEmail/:dareId/:senderEmail/:causeId/:amount', function(
 
         responseHelper.sendResponse(res);
     }, userDare);
+});
+
+app.get('/evidence/:id/:value', function(req, res) {
+    // Updates the evidence of the specified dare.
+    var id = req.params.id;
+    var value = req.params.value;
+
+    databaseService.updateEvidence(function(error) {
+        if (error) {
+            responseHelper.sendResponse(res, null, 500);
+
+            return;
+        }
+
+        responseHelper.sendResponse(res);
+    }, id, value);
+});
+
+app.get('/status/:id/:value', function(req, res) {
+    // Updates the status of the specified dare.
+    var id = req.params.id;
+    var value = req.params.value;
+
+    databaseService.updateStatus(function(error) {
+        if (error) {
+            responseHelper.sendResponse(res, null, 500);
+
+            return;
+        }
+
+        responseHelper.sendResponse(res);
+    }, id, value);
 });
 
 app.get('/causes', function(req, res) {
