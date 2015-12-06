@@ -81,12 +81,12 @@ app.get('/users/:username/sent-dares', function(req, res) {
     databaseService.getSentDares(res, username);
 });
 
-app.get('/users/:receiverUsername/:dareId/:senderUsername/:causeId/:amount', function(req, res) {
+app.get('/users/:receiverEmail/:dareId/:senderUsername/:causeId/:amount', function(req, res) {
     // Dares a user.
     var userDare = {
         'dareId': req.params.dareId,
         'senderUsername': req.params.senderUsername,
-        'receiverUsername': req.params.receiverUsername,
+        'receiverEmail': req.params.receiverEmail,
         'causeId': req.params.causeId,
         'amount': req.params.amount
     };

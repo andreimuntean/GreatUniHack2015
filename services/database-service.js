@@ -183,8 +183,8 @@ var getSentDares = function(res, username) {
 };
 
 var dareUser = function(res, userDare) {
-    var query = 'insert into UserDare (DareId, SenderUsername, ReceiverUsername, CauseId, Amount) VALUES('
-        + userDare.dareId + ', "' + userDare.senderUsername + '", "' + userDare.receiverUsername
+    var query = 'insert into UserDare (DareId, SenderUsername, ReceiverEmail, CauseId, Amount) VALUES('
+        + userDare.dareId + ', "' + userDare.senderUsername + '", "' + userDare.receiverEmail
         + userDare.causeId + ', ' + userDare.amount + ')';
 
     connection.query(query, function(error, result) {
