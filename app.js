@@ -131,7 +131,7 @@ app.get('/dares/:id', function(req, res) {
     }, id);
 });
 
-app.get('/users/:email/received-dares', function(req, res) {
+app.get('/received-dares/:email', function(req, res) {
     // Gets the dares received by a specified user.
     var email = req.params.email;
 
@@ -146,7 +146,7 @@ app.get('/users/:email/received-dares', function(req, res) {
     }, email);
 });
 
-app.get('/users/:email/sent-dares', function(req, res) {
+app.get('/sent-dares/:email', function(req, res) {
     // Gets the dares sent by a specified user.
     var email = req.params.email;
 
@@ -161,7 +161,7 @@ app.get('/users/:email/sent-dares', function(req, res) {
     }, email);
 });
 
-app.get('/users/:email/active-dares', function(req, res) {
+app.get('/active-dares/:email', function(req, res) {
     // Gets the dares related to this user that are active.
     var email = req.params.email;
 
@@ -176,7 +176,7 @@ app.get('/users/:email/active-dares', function(req, res) {
     }, email);
 });
 
-app.get('/users/:email/pending-dares', function(req, res) {
+app.get('/pending-dares/:email', function(req, res) {
     // Gets the dares related to this user that are pending.
     var email = req.params.email;
 
@@ -191,7 +191,7 @@ app.get('/users/:email/pending-dares', function(req, res) {
     }, email);
 });
 
-app.get('/users/:email/completed-dares', function(req, res) {
+app.get('/completed-dares/:email', function(req, res) {
     // Gets the dares related to this user that are completed.
     var email = req.params.email;
 
