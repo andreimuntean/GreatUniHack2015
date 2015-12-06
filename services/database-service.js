@@ -180,7 +180,7 @@ var dareUser = function(callback, userDare) {
 };
 
 var updateEvidence = function(callback, id, value) {
-    var query = 'update UserDares set Evidence = "' + value + '" where UserDareId = ' + id;
+    var query = 'update UserDares set Evidence = "' + value.decodeURI() + '" where UserDareId = ' + id;
 
     client.query(query, function(error, result) {
         callback(error);
