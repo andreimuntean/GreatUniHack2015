@@ -30,8 +30,8 @@ var getUser = function(callback, email) {
 };
 
 var createUser = function(callback, user) {
-    var query = 'insert into Users (Username, Email, Password) VALUES('
-        + '"' + user.username + '", "' + user.email + '", "' + user.password + '")';
+    var query = 'insert into Users (Email, Password) VALUES('
+        + '"' + user.email + '", "' + user.password + '")';
 
     client.query(query, function(error, result) {
         callback(error);
