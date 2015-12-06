@@ -57,39 +57,21 @@ app.post('/logout', function(req, res) {
 
 app.get('/dares', function(req, res) {
     // Gets the list of dares.
-    try {
-        var dares = databaseService.getDares(res);
-
-        responseHelper.sendResponse(res, dares);
-    } catch (error) {
-        responseHelper.sendResponse(res, null, error.message);
-    }
+    databaseService.getDares(res);
 });
 
 app.get('/dares/:id', function(req, res) {
     // Gets the specified dare.
     var id = req.params.id;
 
-    try {
-        var dare = databaseService.getDare(res, id);
-
-        responseHelper.sendResponse(res, dare);
-    } catch (error) {
-        responseHelper.sendResponse(res, null, error.message);
-    }
+    databaseService.getDare(res, id);
 });
 
 app.get('/users/:username/received-dares', function(req, res) {
     // Gets the dares received by a specified user.
     var username = req.params.username;
 
-    try {
-        var receivedDares = databaseService.getReceivedDares(res, username);
-
-        responseHelper.sendResponse(res, receivedDares);
-    } catch (error) {
-        responseHelper.sendResponse(res, null, error.message);
-    }
+    databaseService.getReceivedDares(res, username);
 });
 
 app.get('/users/:username/sent-dares', function(req, res) {
@@ -123,28 +105,12 @@ app.get('/users/:receiverUsername/:dareId/:senderUsername/:causeId/:amount', fun
 
 app.get('/causes', function(req, res) {
     // Gets the causes.
-    try {
-        var causes = justGivingService.getCauses();
-        
-        responseHelper.sendResponse(res, causes);
-
-    } catch (error) {
-        responseHelper.sendResponse(res, null, error.message);
-    }
+    justGivingService.getCauses(res);
 });
 
 app.get('/causes/:id', function(req, res) {
     // Gets the specified cause.
-    var id = req.params.id;
-
-    try {
-        var cause = justGivingService.getCause(id);
-        
-        responseHelper.sendResponse(res, cause);
-
-    } catch (error) {
-        responseHelper.sendResponse(res, null, error.message);
-    }
+    justGivingService.getCause(res, id);
 });
 
 // Starts the server.
