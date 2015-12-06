@@ -180,7 +180,7 @@ var dareUser = function(callback, userDare) {
 };
 
 var updateEvidence = function(callback, id, value) {
-    var query = 'update UserDares set Evidence = "' + value + '" where Id = ' + id;
+    var query = 'update UserDares set Evidence = "' + value + '" where UserDareId = ' + id;
 
     client.query(query, function(error, result) {
         callback(error);
@@ -188,7 +188,7 @@ var updateEvidence = function(callback, id, value) {
 };
 
 var updateStatus = function(callback, id, value) {
-    var query = 'update UserDares set Status = ' + value + ' where Id = ' + id;
+    var query = 'update UserDares set Status = ' + value + ' where UserDareId = ' + id;
 
     client.query(query, function(error, result) {
         callback(error);
