@@ -28,9 +28,9 @@ app.get('/users', function(req, res) {
     });
 });
 
-app.get('/users/:username', function(req, res) {
+app.get('/users/:email', function(req, res) {
     // Gets the specified user.
-    var username = req.params.username;
+    var email = req.params.email;
 
     databaseService.getUser(function(error, user) {
         if (error) {
@@ -39,7 +39,7 @@ app.get('/users/:username', function(req, res) {
             return;
         }
 
-        // Determines whether a user with the specified username exists.
+        // Determines whether a user with the specified email exists.
         if (!user) {
             responseHelper.sendResponse(res, null, 404);
 
@@ -47,21 +47,20 @@ app.get('/users/:username', function(req, res) {
         }
 
         responseHelper.sendResponse(res, user);
-    }, username);
+    }, email);
 });
 
 // @TO-DO: Change to POST and fix security issues.
-app.get('/users/:username/:password/:email', function(req, res) {
+app.get('/users/:email/:password', function(req, res) {
     // Creates a new user.
     var user = {
-        'username': req.params.username,
-        'password': req.params.password,
-        'email': req.params.email
+        'email': req.params.email,
+        'password': req.params.password
     };
 
     databaseService.createUser(function(error) {
         if (error) {
-            // A user with this username already exists.
+            // A user with this email already exists.
             responseHelper.sendResponse(res, null, 409);
 
             return;
@@ -72,9 +71,9 @@ app.get('/users/:username/:password/:email', function(req, res) {
 });
 
 // @TO-DO: Change to POST and fix security issues.
-app.get('/login/:username/:password', function(req, res) {
+app.get('/login/:email/:password', function(req, res) {
     // Signs a user in.
-    var username = req.params.username;
+    var email = req.params.email;
     var password = req.params.password;
 
     databaseService.login(function(error, user) {
@@ -84,7 +83,7 @@ app.get('/login/:username/:password', function(req, res) {
             return;
         }
 
-        // Determines whether a user with the specified username and password exists.
+        // Determines whether a user with the specified email and password exists.
         if (!user) {
             responseHelper.sendResponse(res, null, 401);
 
@@ -92,7 +91,7 @@ app.get('/login/:username/:password', function(req, res) {
         }
 
         responseHelper.sendResponse(res, { 'token': '' });
-    }, username, password);
+    }, email, password);
 });
 
 app.post('/logout', function(req, res) {
@@ -132,9 +131,9 @@ app.get('/dares/:id', function(req, res) {
     }, id);
 });
 
-app.get('/users/:username/received-dares', function(req, res) {
+app.get('/users/:email/received-dares', function(req, res) {
     // Gets the dares received by a specified user.
-    var username = req.params.username;
+    var email = req.params.email;
 
     databaseService.getReceivedDares(function(error, dares) {
         if (error) {
@@ -144,12 +143,12 @@ app.get('/users/:username/received-dares', function(req, res) {
         }
 
         responseHelper.sendResponse(res, dares);
-    }, username);
+    }, email);
 });
 
-app.get('/users/:username/sent-dares', function(req, res) {
+app.get('/users/:email/sent-dares', function(req, res) {
     // Gets the dares sent by a specified user.
-    var username = req.params.username;
+    var email = req.params.email;
 
     databaseService.getSentDares(function(error, dares) {
         if (error) {
@@ -159,12 +158,12 @@ app.get('/users/:username/sent-dares', function(req, res) {
         }
 
         responseHelper.sendResponse(res, dares);
-    }, username);
+    }, email);
 });
 
-app.get('/users/:username/active-dares', function(req, res) {
+app.get('/users/:email/active-dares', function(req, res) {
     // Gets the dares related to this user that are active.
-    var username = req.params.username;
+    var email = req.params.email;
 
     databaseService.getActiveDares(function(error, dares) {
         if (error) {
@@ -174,12 +173,12 @@ app.get('/users/:username/active-dares', function(req, res) {
         }
 
         responseHelper.sendResponse(res, dares);
-    }, username);
+    }, email);
 });
 
-app.get('/users/:username/pending-dares', function(req, res) {
+app.get('/users/:email/pending-dares', function(req, res) {
     // Gets the dares related to this user that are pending.
-    var username = req.params.username;
+    var email = req.params.email;
 
     databaseService.getPendingDares(function(error, dares) {
         if (error) {
@@ -189,12 +188,12 @@ app.get('/users/:username/pending-dares', function(req, res) {
         }
 
         responseHelper.sendResponse(res, dares);
-    }, username);
+    }, email);
 });
 
-app.get('/users/:username/completed-dares', function(req, res) {
+app.get('/users/:email/completed-dares', function(req, res) {
     // Gets the dares related to this user that are completed.
-    var username = req.params.username;
+    var email = req.params.email;
 
     databaseService.getCompletedDares(function(error, dares) {
         if (error) {
@@ -204,14 +203,14 @@ app.get('/users/:username/completed-dares', function(req, res) {
         }
 
         responseHelper.sendResponse(res, dares);
-    }, username);
+    }, email);
 });
 
-app.get('/users/:receiverEmail/:dareId/:senderUsername/:causeId/:amount', function(req, res) {
+app.get('/users/:receiverEmail/:dareId/:senderEmail/:causeId/:amount', function(req, res) {
     // Dares a user.
     var userDare = {
         'dareId': req.params.dareId,
-        'senderUsername': req.params.senderUsername,
+        'senderEmail': req.params.senderEmail,
         'receiverEmail': req.params.receiverEmail,
         'causeId': req.params.causeId,
         'amount': req.params.amount
@@ -224,17 +223,12 @@ app.get('/users/:receiverEmail/:dareId/:senderUsername/:causeId/:amount', functi
             return;
         }
 
+        // Sends an email to the challengee.
+        contactService.sendEmail(receiver.email, 'You have been challenged!',
+            'Someone has just challenged you! Log into http://hi-dare.com/ to see your challenges.');
+
         responseHelper.sendResponse(res);
     }, userDare);
-    
-    /* // Gets the challenger and challengee.
-    var sender = databaseService.getUser(senderUsername);
-    var receiver = databaseService.getUser(receiverUsername);
-
-    // Sends an email to the challengee.
-    contactService.sendEmail(receiver.email, 'You have been challenged!',
-        'You have just been challenged by ' + sender.username + '!'
-        + ' Log into http://hi-dare.com/ to see your challenges.');*/
 });
 
 app.get('/causes', function(req, res) {

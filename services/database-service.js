@@ -17,8 +17,8 @@ var getUsers = function(callback) {
     });
 };
 
-var getUser = function(callback, username) {
-    var query = 'select * from Users where Username ="' + username + '" or Email = "' + username + '"';
+var getUser = function(callback, email) {
+    var query = 'select * from Users where Email ="' + email + '"';
 
     client.query(query, function(error, result) {
         if (!error) {
@@ -38,8 +38,8 @@ var createUser = function(callback, user) {
     });
 };
 
-var login = function(callback, username, password) {
-    var query = 'select * from Users where Username ="' + username + '" and Password = "' + password + '"';
+var login = function(callback, email, password) {
+    var query = 'select * from Users where Email ="' + email + '" and Password = "' + password + '"';
 
     client.query(query, function(error, result) {
         if (!error) {
@@ -82,8 +82,8 @@ var getDare = function(callback, id) {
     });
 };
 
-var getReceivedDares = function(callback, username) {
-    var query = 'select * from UserDares where ReceiverUsername = "' + username + '"';
+var getReceivedDares = function(callback, email) {
+    var query = 'select * from UserDares where ReceiverEmail = "' + email + '"';
 
     client.query(query, function(error, result) {
         if (!error) {
@@ -98,8 +98,8 @@ var getReceivedDares = function(callback, username) {
     });
 };
 
-var getSentDares = function(callback, username) {
-    var query = 'select * from UserDares where SenderUsername = "' + username + '"';
+var getSentDares = function(callback, email) {
+    var query = 'select * from UserDares where SenderEmail = "' + email + '"';
 
     client.query(query, function(error, result) {
         if (!error) {
@@ -114,8 +114,8 @@ var getSentDares = function(callback, username) {
     });
 };
 
-var getActiveDares = function(callback, username) {
-    var query = 'select * from UserDares where (SenderUsername = "' + username + '" or ReceiverUsername = "' + username + '")'
+var getActiveDares = function(callback, email) {
+    var query = 'select * from UserDares where (SenderEmail = "' + email + '" or ReceiverEmail = "' + email + '")'
         + ' and Status = 0';
 
     client.query(query, function(error, result) {
@@ -131,8 +131,8 @@ var getActiveDares = function(callback, username) {
     });
 };
 
-var getPendingDares = function(callback, username) {
-    var query = 'select * from UserDares where (SenderUsername = "' + username + '" or ReceiverUsername = "' + username + '")'
+var getPendingDares = function(callback, email) {
+    var query = 'select * from UserDares where (SenderEmail = "' + email + '" or ReceiverEmail = "' + email + '")'
         + ' and Status = 1';
 
     client.query(query, function(error, result) {
@@ -148,8 +148,8 @@ var getPendingDares = function(callback, username) {
     });
 };
 
-var getCompletedDares = function(callback, username) {
-    var query = 'select * from UserDares where (SenderUsername = "' + username + '" or ReceiverUsername = "' + username + '")'
+var getCompletedDares = function(callback, email) {
+    var query = 'select * from UserDares where (SenderEmail = "' + email + '" or ReceiverEmail = "' + email + '")'
         + ' and Status = 2';
 
     client.query(query, function(error, result) {
@@ -166,8 +166,8 @@ var getCompletedDares = function(callback, username) {
 };
 
 var dareUser = function(callback, userDare) {
-    var query = 'insert into UserDare (DareId, SenderUsername, ReceiverEmail, CauseId, Amount) VALUES('
-        + userDare.dareId + ', "' + userDare.senderUsername + '", "' + userDare.receiverEmail
+    var query = 'insert into UserDare (DareId, SenderEmail, ReceiverEmail, CauseId, Amount) VALUES('
+        + userDare.dareId + ', "' + userDare.senderEmail + '", "' + userDare.receiverEmail
         + userDare.causeId + ', ' + userDare.amount + ')';
 
     client.query(query, function(error, result) {
