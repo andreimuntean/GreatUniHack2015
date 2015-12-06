@@ -1,0 +1,232 @@
+[
+  {
+    "name": "Sample Reporting Charity",
+    "description": "Group B Strep is the most common cause of life-threatening infection in newborn babies in the UK - infections that are mostly preventable. GBSS is a national charity providing information on GBS to families and health professionals, and offering support. It also raises funds for research.\n",
+    "logoUrl": "groupb_logo_large.gif",
+    "logoAbsoluteUrl": "http://images.sandbox.justgiving.com/image/groupb_logo_large.gif",
+    "profilePageUrl": "https://www.justgiving.com/groupb",
+    "registrationNumber": "1058159",
+    "websiteUrl": "http://www.gbss.org.uk",
+    "id": 2069,
+    "categories": [
+      "Health",
+      "Mother and child"
+    ],
+    "countryCode": "GB",
+    "currencyCode": "GBP"
+  },
+  {
+    "name": "The Demo Charity1",
+    "description": "We raise money to support the work of Great Ormond Street Hospital so that it can help more children who need its specialist expertise.",
+    "logoUrl": "76012844-e161-4bad-bb46-19bb9eafc1c5.jpg",
+    "logoAbsoluteUrl": "http://images.sandbox.justgiving.com/image/76012844-e161-4bad-bb46-19bb9eafc1c5.jpg",
+    "profilePageUrl": "https://www.justgiving.com/jgdemo",
+    "registrationNumber": "123456",
+    "websiteUrl": "http://www.democharity.co.uk",
+    "id": 2050,
+    "categories": [
+      "Music"
+    ],
+    "countryCode": "GB",
+    "currencyCode": "GBP"
+  },
+  {
+    "name": "Blue Cross",
+    "description": "The Blue Cross provides practical support, information and advice for pet and horse owners. Through a network of animal adoption centres it rehomes thousands of animals each year. Its\nhospitals provide veterinary care for the pets of people who cannot afford private vets' fees. ",
+    "logoUrl": "bluecross_logo_large.gif",
+    "logoAbsoluteUrl": "http://images.sandbox.justgiving.com/image/bluecross_logo_large.gif",
+    "profilePageUrl": "https://www.justgiving.com/bluecrossanimal",
+    "registrationNumber": "224392",
+    "websiteUrl": "http://www.bluecross.org.uk",
+    "id": 2074,
+    "categories": [
+      "Domestic"
+    ],
+    "countryCode": "GB",
+    "currencyCode": "GBP"
+  },
+  {
+    "name": "L'Arche",
+    "description": "L'Arche builds communities with people who have learning disabilities. Together with assistants, they live in ordinary houses, with choice in and access to work, therapy and local resources. The nine L'Arche communities in England, Scotland and Wales are founded on Christian values, also welcoming people of other faiths and none.",
+    "logoUrl": "larche_logo.gif",
+    "logoAbsoluteUrl": "http://images.sandbox.justgiving.com/image/larche_logo.gif",
+    "profilePageUrl": "https://www.justgiving.com/larche",
+    "registrationNumber": "264166, Scotland SC038493",
+    "websiteUrl": "http://www.larche.org.uk",
+    "id": 2077,
+    "categories": [
+      "Social exclusion",
+      "Learning disabilities"
+    ],
+    "countryCode": "GB",
+    "currencyCode": "GBP"
+  },
+  {
+    "name": "Sense - National Deafblind and Rubella Association",
+    "description": "Sense is the UK's largest organisation offering support to deafblind people and their families.  Established in 1955 as a parent's support group, Sense now offers a range of services - including, advice, housing, education and practical help to children and adults who are both deaf and blind.",
+    "logoUrl": "sense_logo.gif",
+    "logoAbsoluteUrl": "http://images.sandbox.justgiving.com/image/sense_logo.gif",
+    "profilePageUrl": "https://www.justgiving.com/sense",
+    "registrationNumber": "289868",
+    "websiteUrl": "http://www.sense.org.uk",
+    "id": 100,
+    "categories": [
+      "Sight",
+      "Hearing",
+      "Education",
+      "Disability"
+    ],
+    "countryCode": "GB",
+    "currencyCode": "GBP"
+  },
+  {
+    "name": "Karuna Trust",
+    "description": "Karuna supports educational, health and cultural projects throughout South Asia that are helping thousands of oppressed women, men and children to develop the skills, dignity and confidence to transform their lives and take their rightful place in society.",
+    "logoUrl": "karuna_logo.gif",
+    "logoAbsoluteUrl": "http://images.sandbox.justgiving.com/image/karuna_logo.gif",
+    "profilePageUrl": "https://www.justgiving.com/karuna",
+    "registrationNumber": "327461",
+    "websiteUrl": "http://www.karuna.org",
+    "id": 102,
+    "categories": [
+      "Country-specific",
+      "Education",
+      "Health",
+      "International"
+    ],
+    "countryCode": "GB",
+    "currencyCode": "GBP"
+  },
+  {
+    "name": "Catch22",
+    "description": "Rainer is the national charity for under-supported young people.  They work with young people who haven't had the best start in life and lack appropriate support in the education, social care, health, housing or justice systems.  Rainer services aim to give young people the emotional and practical support they need to lead secure, fulfilled lives.",
+    "logoUrl": "Rainer_logo.gif",
+    "logoAbsoluteUrl": "http://images.sandbox.justgiving.com/image/Rainer_logo.gif",
+    "profilePageUrl": "https://www.justgiving.com/Catch2",
+    "registrationNumber": "229132",
+    "websiteUrl": "http://www.raineronline.org",
+    "id": 2002,
+    "categories": [
+      "Social exclusion / care",
+      "Children's charities",
+      "Homelessness charities",
+      "Social welfare organisations",
+      "Protection"
+    ],
+    "countryCode": "GB",
+    "currencyCode": "GBP"
+  },
+  {
+    "name": "Breast Cancer Campaign",
+    "description": "At Breast Cancer Campaign, everyone can be part of the cure. We are a unique community of scientists, supporters and people touched by breast cancer. Together we make Pink Science happen – our pioneering approach to breast cancer research that identifies and funds the best research projects. ",
+    "logoUrl": "85e0e6db-eada-4638-a97d-6dcbcec91835.gif",
+    "logoAbsoluteUrl": "http://images.sandbox.justgiving.com/image/85e0e6db-eada-4638-a97d-6dcbcec91835.gif",
+    "profilePageUrl": "https://www.justgiving.com/breastcancer",
+    "registrationNumber": "299758",
+    "websiteUrl": "http://www.breastcancercampaign.org",
+    "id": 2007,
+    "categories": [
+      "Cancer"
+    ],
+    "countryCode": "GB",
+    "currencyCode": "GBP"
+  },
+  {
+    "name": "Andy Cole Children's Foundation",
+    "description": "The Andy Cole Children's Foundation was set up by the world famous England and Blackburn Rovers football star to help disadvantaged children, primarily in countries of the Southern African Region but also all over the world and the UK.",
+    "logoUrl": "andycole_child_logo_large.gif",
+    "logoAbsoluteUrl": "http://images.sandbox.justgiving.com/image/andycole_child_logo_large.gif",
+    "profilePageUrl": "https://www.justgiving.com/andycole",
+    "registrationNumber": "1079911",
+    "websiteUrl": "http://www.andycolecf.com",
+    "id": 2010,
+    "categories": [
+      "International",
+      "Children"
+    ],
+    "countryCode": "GB",
+    "currencyCode": "GBP"
+  },
+  {
+    "name": "NSPCC",
+    "description": "The NSPCC's purpose is to end cruelty to children and our vision is of a Society where all children are loved, valued and able to fulfil their potential. We campaign to change the law, provide ChildLine and the NSPCC Helpline, offer advice for adults, and much more.  ",
+    "logoUrl": "nspcc_logo_large2.gif",
+    "logoAbsoluteUrl": "http://images.sandbox.justgiving.com/image/nspcc_logo_large2.gif",
+    "profilePageUrl": "https://www.justgiving.com/nspcc",
+    "registrationNumber": "216401 and SC037717",
+    "websiteUrl": "http://www.nspcc.org.uk",
+    "id": 2013,
+    "categories": [
+      "Protection",
+      "Children's charities",
+      "Social welfare organisations",
+      "Education"
+    ],
+    "countryCode": "GB",
+    "currencyCode": "GBP"
+  },
+  {
+    "name": "UK for UNHCR",
+    "description": "UNHCR is the world's leading refugee agency which provides all-round assistance to those who are  forced to flee their homes - medical care, water, food, shelter and blankets. UK for UNHCR is the British charity that supports the work of UNHCR. It works to raise awareness of the needs of refugees and to raise funds to support programmes for refugees around the world.",
+    "logoUrl": "unhcr_logo_large.gif",
+    "logoAbsoluteUrl": "http://images.sandbox.justgiving.com/image/unhcr_logo_large.gif",
+    "profilePageUrl": "https://www.justgiving.com/refAid1",
+    "registrationNumber": "1041695",
+    "websiteUrl": "http://www.ukforunhcr.org",
+    "id": 2021,
+    "categories": [
+      "Refugees",
+      "Emergency relief",
+      "General"
+    ],
+    "countryCode": "GB",
+    "currencyCode": "GBP"
+  },
+  {
+    "name": "The European Children's Trust",
+    "description": "The European Children’s Trust promotes reformed childcare systems in central and eastern Europe and the former Soviet Union with an aim of meeting the right and need of every child to grow up in a family environment.",
+    "logoUrl": "ect_logo_white.gif",
+    "logoAbsoluteUrl": "http://images.sandbox.justgiving.com/image/ect_logo_white.gif",
+    "profilePageUrl": "https://www.justgiving.com/ect",
+    "registrationNumber": "803070",
+    "websiteUrl": "http://www.everychild.org.uk",
+    "id": 202,
+    "categories": [
+      "International",
+      "Children",
+      "Children's charities"
+    ],
+    "countryCode": "GB",
+    "currencyCode": "GBP"
+  },
+  {
+    "name": "British Deaf Association",
+    "description": "The British Deaf Association promotes funding for deaf people.",
+    "logoUrl": "WLBDA_logo_large_WL.gif",
+    "logoAbsoluteUrl": "http://images.sandbox.justgiving.com/image/WLBDA_logo_large_WL.gif",
+    "profilePageUrl": "https://www.justgiving.com/WLBDA",
+    "registrationNumber": "1031687",
+    "websiteUrl": "http://www.bda.org.uk",
+    "id": 2028,
+    "categories": [
+      "Deaf"
+    ],
+    "countryCode": "GB",
+    "currencyCode": "GBP"
+  },
+  {
+    "name": "Positively Women",
+    "description": "Positively Women is the leading UK charity providing peer support - support for women living with HIV by women living with HIV. Positively Women aims to enable women living with HIV to make informed choices and to ensure that the voice of HIV positive women is heard.",
+    "logoUrl": "positivelywomen_logo_large.gif",
+    "logoAbsoluteUrl": "http://images.sandbox.justgiving.com/image/positivelywomen_logo_large.gif",
+    "profilePageUrl": "https://www.justgiving.com/positivelywomen old account",
+    "registrationNumber": "1007685",
+    "websiteUrl": "http://www.positivelywomen.org.uk",
+    "id": 2029,
+    "categories": [
+      "AIDS"
+    ],
+    "countryCode": "GB",
+    "currencyCode": "GBP"
+  }
+]

@@ -233,12 +233,22 @@ app.get('/users/:receiverEmail/:dareId/:senderEmail/:causeId/:amount', function(
 
 app.get('/causes', function(req, res) {
     // Gets the causes.
-    justGivingService.getCauses(res);
+    justGivingService.getCauses(function(causes) {
+        responseHelper.sendResponse(res, causes);
+    }, function(error) {
+        responseHelper.sendResponse(res, null, 500);
+    });
 });
 
 app.get('/causes/:id', function(req, res) {
     // Gets the specified cause.
-    justGivingService.getCause(res, id);
+    var id = req.params.id;
+    
+    justGivingService.getCause(function(cause) {
+        responseHelper.sendResponse(res, cause);
+    }, function(error) {
+        responseHelper.sendResponse(res, null, 500);
+    }, id);
 });
 
 // Starts the server.
