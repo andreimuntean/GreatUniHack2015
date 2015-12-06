@@ -2,11 +2,11 @@ var mysql = require('mysql');
  
 // Connects to the database.
 var client = mysql.createConnection({
-    host: 'sql4.freemysqlhosting.net',//process.env.DATABASE_HOST,
-    port: 3306, // process.env.DATABASE_PORT,
-    user: 'sql498855', //process.env.DATABASE_USER,
-    password: 'wNf2TJavcW', //process.env.DATABASE_PASSWORD,
-    database: 'sql498855' //process.env.DATABASE_NAME
+    host: process.env.DATABASE_HOST,
+    port: process.env.DATABASE_PORT,
+    user: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASSWORD,
+    database: process.env.DATABASE_NAME
 });
  
 // The client is automatically replaced if it is disconnected.
