@@ -1,200 +1,177 @@
-var mysql = require('mysql');
-
 // Instantiates the services and helpers.
-var responseHelper = require('../helpers/response-helper');
+var client = require('../helpers/client-helper').getClient();
 
-// Connects to the database.
-var connection = mysql.createConnection({
-    host: process.env.DATABASE_HOST,
-    port: process.env.DATABASE_PORT,
-    user: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE_NAME
-});
-
-var getUsers = function(res) {
+var getUsers = function(callback) {
     var query = 'select * from Users';
 
-    connection.query(query, function(error, result) {
-        if (error) {
-            responseHelper.sendResponse(res, null, 500);
+    client.query(query, function(error, result) {
+        if (!error) {
+            var users = [];
 
-            return;
+            for (key in result) {
+                users.push(result[key]);
+            }
         }
 
-        var users = [];
-
-        for (key in result) {
-            users.push(result[key]);
-        }
-
-        responseHelper.sendResponse(res, users);
+        callback(error, users);
     });
 };
 
-var getUser = function(res, username) {
-    var query = 'select * from Users where Username ="' + username + '"';
+var getUser = function(callback, username) {
+    var query = 'select * from Users where Username ="' + username + '" or Email = "' + username + '"';
 
-    connection.query(query, function(error, result) {
-        if (error) {
-            responseHelper.sendResponse(res, null, 500);
-
-            return;
+    client.query(query, function(error, result) {
+        if (!error) {
+            var user = result[0];
         }
 
-        // Determines whether a user with the specified username exists.
-        if (result.length == 0) {
-            responseHelper.sendResponse(res, null, 404);
-
-            return;
-        }
-
-        var user = result[0];
-
-        responseHelper.sendResponse(res, user);
+        callback(error, user);
     });
 };
 
-var createUser = function(res, user) {
+var createUser = function(callback, user) {
     var query = 'insert into Users (Username, Email, Password) VALUES('
         + '"' + user.username + '", "' + user.email + '", "' + user.password + '")';
 
-    connection.query(query, function(error, result) {
-        if (error) {
-            // A user with this username already exists.
-            responseHelper.sendResponse(res, null, 409);
-
-            return;
-        }
-
-        responseHelper.sendResponse(res);
+    client.query(query, function(error, result) {
+        callback(error);
     });
 };
 
-var login = function(res, username, password) {
+var login = function(callback, username, password) {
     var query = 'select * from Users where Username ="' + username + '" and Password = "' + password + '"';
 
-    connection.query(query, function(error, result) {
-        if (error) {
-            responseHelper.sendResponse(res, null, 500);
-
-            return;
+    client.query(query, function(error, result) {
+        if (!error) {
+            var user = result[0];
         }
 
-        // Determines whether a user with the specified username and password exists.
-        if (result.length == 0) {
-            responseHelper.sendResponse(res, null, 401);
-
-            return;
-        }
-
-        var user = result[0];
-
-        responseHelper.sendResponse(res, { 'token': '' });
+        callback(error, user);
     });
 };
 
-var logout = function(res, token) {
-    // @TO-DO: Implement the method.
-    responseHelper.sendResponse(res, null, 500);
+var logout = function(callback, token) {
+    callback(null);
 };
 
-var getDares = function(res) {
+var getDares = function(callback) {
     var query = 'select * from Dares';
 
-    connection.query(query, function(error, result) {
-        if (error) {
-            responseHelper.sendResponse(res, null, 500);
+    client.query(query, function(error, result) {
+        if (!error) {
+            var dares = [];
 
-            return;
+            for (key in result) {
+                dares.push(result[key]);
+            }
         }
 
-        var dares = [];
-
-        for (key in result) {
-            dares.push(result[key]);
-        }
-
-        responseHelper.sendResponse(res, dares);
+        callback(error, dares);
     });
 };
 
-var getDare = function(res, id) {
+var getDare = function(callback, id) {
     var query = 'select * from Dares where Id =' + id;
 
-    connection.query(query, function(error, result) {
-        if (error) {
-            responseHelper.sendResponse(res, null, 500);
-
-            return;
+    client.query(query, function(error, result) {
+        if (!error) {
+            var dare = result[0];
         }
 
-        // Determines whether a dare with the specified id exists.
-        if (result.length == 0) {
-            responseHelper.sendResponse(res, null, 404);
-
-            return;
-        }
-
-        var dare = result[0];
-
-        responseHelper.sendResponse(res, dare);
+        callback(error, dare);
     });
 };
 
-var getReceivedDares = function(res, username) {
+var getReceivedDares = function(callback, username) {
     var query = 'select * from UserDares where ReceiverUsername = "' + username + '"';
 
-    connection.query(query, function(error, result) {
-        if (error) {
-            responseHelper.sendResponse(res, null, 500);
+    client.query(query, function(error, result) {
+        if (!error) {
+            var dares = [];
 
-            return;
+            for (key in result) {
+                dares.push(result[key]);
+            }
         }
 
-        var receivedDares = [];
-
-        for (key in result) {
-            receivedDares.push(result[key]);
-        }
-
-        responseHelper.sendResponse(res, receivedDares);
+        callback(error, dares);
     });
 };
 
-var getSentDares = function(res, username) {
+var getSentDares = function(callback, username) {
     var query = 'select * from UserDares where SenderUsername = "' + username + '"';
 
-    connection.query(query, function(error, result) {
-        if (error) {
-            responseHelper.sendResponse(res, null, 500);
+    client.query(query, function(error, result) {
+        if (!error) {
+            var dares = [];
 
-            return;
+            for (key in result) {
+                dares.push(result[key]);
+            }
         }
 
-        var senderDares = [];
-
-        for (key in result) {
-            senderDares.push(result[key]);
-        }
-
-        responseHelper.sendResponse(res, senderDares);
+        callback(error, dares);
     });
 };
 
-var dareUser = function(res, userDare) {
+var getActiveDares = function(callback, username) {
+    var query = 'select * from UserDares where (SenderUsername = "' + username + '" or ReceiverUsername = "' + username + '")'
+        + ' and Status = 0';
+
+    client.query(query, function(error, result) {
+        if (!error) {
+            var dares = [];
+
+            for (key in result) {
+                dares.push(result[key]);
+            }
+        }
+
+        callback(error, dares);
+    });
+};
+
+var getPendingDares = function(callback, username) {
+    var query = 'select * from UserDares where (SenderUsername = "' + username + '" or ReceiverUsername = "' + username + '")'
+        + ' and Status = 1';
+
+    client.query(query, function(error, result) {
+        if (!error) {
+            var dares = [];
+
+            for (key in result) {
+                dares.push(result[key]);
+            }
+        }
+
+        callback(error, dares);
+    });
+};
+
+var getCompletedDares = function(callback, username) {
+    var query = 'select * from UserDares where (SenderUsername = "' + username + '" or ReceiverUsername = "' + username + '")'
+        + ' and Status = 2';
+
+    client.query(query, function(error, result) {
+        if (!error) {
+            var dares = [];
+
+            for (key in result) {
+                dares.push(result[key]);
+            }
+        }
+
+        callback(error, dares);
+    });
+};
+
+var dareUser = function(callback, userDare) {
     var query = 'insert into UserDare (DareId, SenderUsername, ReceiverEmail, CauseId, Amount) VALUES('
         + userDare.dareId + ', "' + userDare.senderUsername + '", "' + userDare.receiverEmail
         + userDare.causeId + ', ' + userDare.amount + ')';
 
-    connection.query(query, function(error, result) {
-        if (error) {
-            responseHelper.sendResponse(res, null, 500);
-
-            return;
-        }
-
-        responseHelper.sendResponse(res);
+    client.query(query, function(error, result) {
+        callback(error);
     });
 }
 
