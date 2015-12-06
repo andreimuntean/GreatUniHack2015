@@ -58,7 +58,7 @@ app.post('/logout', function(req, res) {
 app.get('/dares', function(req, res) {
     // Gets the list of dares.
     try {
-        var dares = databaseService.getDares();
+        var dares = databaseService.getDares(res);
 
         responseHelper.sendResponse(res, dares);
     } catch (error) {
@@ -71,11 +71,11 @@ app.get('/dares/:id', function(req, res) {
     var id = req.params.id;
 
     try {
-        var dare = databaseService.getDare(id);
+        var dare = databaseService.getDare(res, id);
 
-        sendResponse(res, dare);
+        responseHelper.sendResponse(res, dare);
     } catch (error) {
-        sendResponse(res, null, error.message);
+        responseHelper.sendResponse(res, null, error.message);
     }
 });
 
@@ -84,7 +84,7 @@ app.get('/users/:username/received-dares', function(req, res) {
     var username = req.params.username;
 
     try {
-        var receivedDares = databaseService.getReceivedDares(username);
+        var receivedDares = databaseService.getReceivedDares(res, username);
 
         responseHelper.sendResponse(res, receivedDares);
     } catch (error) {
@@ -96,13 +96,7 @@ app.get('/users/:username/sent-dares', function(req, res) {
     // Gets the dares sent by a specified user.
     var username = req.params.username;
 
-    try {
-        var sentDares = databaseService.getSentDares(username);
-
-        responseHelper.sendResponse(res, sentDares);
-    } catch (error) {
-        responseHelper.sendResponse(res, null, error.message);
-    }
+    databaseService.getSentDares(res, username);
 });
 
 app.get('/users/:receiverUsername/:dareId/:senderUsername/:causeId/:amount', function(req, res) {
@@ -115,22 +109,16 @@ app.get('/users/:receiverUsername/:dareId/:senderUsername/:causeId/:amount', fun
         'amount': req.params.amount
     };
 
-    try {
-        databaseService.dareUser(userDare);
+    databaseService.dareUser(res, userDare);
+    
+    /* // Gets the challenger and challengee.
+    var sender = databaseService.getUser(senderUsername);
+    var receiver = databaseService.getUser(receiverUsername);
 
-        // Gets the challenger and challengee.
-        var sender = databaseService.getUser(senderUsername);
-        var receiver = databaseService.getUser(receiverUsername);
-
-        // Sends an email to the challengee.
-        contactService.sendEmail(receiver.email, 'You have been challenged!',
-            'You have just been challenged by ' + sender.username + '!'
-            + ' Log into http://hi-dare.com/ to see your challenges.');
-
-        responseHelper.sendResponse(res, userDare);
-    } catch (error) {
-        responseHelper.sendResponse(res, null, error.message);
-    }
+    // Sends an email to the challengee.
+    contactService.sendEmail(receiver.email, 'You have been challenged!',
+        'You have just been challenged by ' + sender.username + '!'
+        + ' Log into http://hi-dare.com/ to see your challenges.');*/
 });
 
 app.get('/causes', function(req, res) {

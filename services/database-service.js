@@ -24,8 +24,8 @@ var getUsers = function(res) {
 
         var users = [];
 
-        for (user in result) {
-            users.push(user);
+        for (key in result) {
+            users.push(result[key]);
         }
 
         responseHelper.sendResponse(res, users);
@@ -99,28 +99,103 @@ var logout = function(res, token) {
     responseHelper.sendResponse(res, null, 500);
 };
 
-var getDares = function() {
-    return [];
+var getDares = function(res) {
+    var query = 'select * from Dares';
+
+    connection.query(query, function(error, result) {
+        if (error) {
+            responseHelper.sendResponse(res, null, 500);
+
+            return;
+        }
+
+        var dares = [];
+
+        for (key in result) {
+            dares.push(result[key]);
+        }
+
+        responseHelper.sendResponse(res, dares);
+    });
 };
 
-var getDare = function(id) {
-    return {};
+var getDare = function(res, id) {
+    var query = 'select * from Dares where Id =' + id;
+
+    connection.query(query, function(error, result) {
+        if (error) {
+            responseHelper.sendResponse(res, null, 500);
+
+            return;
+        }
+
+        // Determines whether a dare with the specified id exists.
+        if (result.length == 0) {
+            responseHelper.sendResponse(res, null, 404);
+
+            return;
+        }
+
+        var dare = result[0];
+
+        responseHelper.sendResponse(res, dare);
+    });
 };
 
-var getReceivedDares = function(username) {
-    return [];
+var getReceivedDares = function(res, username) {
+    var query = 'select * from UserDares where ReceiverUsername = "' + username + '"';
+
+    connection.query(query, function(error, result) {
+        if (error) {
+            responseHelper.sendResponse(res, null, 500);
+
+            return;
+        }
+
+        var receivedDares = [];
+
+        for (key in result) {
+            receivedDares.push(result[key]);
+        }
+
+        responseHelper.sendResponse(res, receivedDares);
+    });
 };
 
-var getSentDares = function(username) {
-    return [];
+var getSentDares = function(res, username) {
+    var query = 'select * from UserDares where SenderUsername = "' + username + '"';
+
+    connection.query(query, function(error, result) {
+        if (error) {
+            responseHelper.sendResponse(res, null, 500);
+
+            return;
+        }
+
+        var senderDares = [];
+
+        for (key in result) {
+            senderDares.push(result[key]);
+        }
+
+        responseHelper.sendResponse(res, senderDares);
+    });
 };
 
-var dareUser = function(userDare) {
-    try {
-        // ...
-    } catch (error) {
-        throw new Error('400');
-    }
+var dareUser = function(res, userDare) {
+    var query = 'insert into UserDare (DareId, SenderUsername, ReceiverUsername, CauseId, Amount) VALUES('
+        + userDare.dareId + ', "' + userDare.senderUsername + '", "' + userDare.receiverUsername
+        + userDare.causeId + ', ' + userDare.amount + ')';
+
+    connection.query(query, function(error, result) {
+        if (error) {
+            responseHelper.sendResponse(res, null, 500);
+
+            return;
+        }
+
+        responseHelper.sendResponse(res);
+    });
 }
 
 module.exports = {
