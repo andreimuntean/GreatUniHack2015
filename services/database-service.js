@@ -166,8 +166,8 @@ var getCompletedDares = function(callback, email) {
 };
 
 var dareUser = function(callback, userDare) {
-    var query = 'insert into UserDare (DareId, SenderEmail, ReceiverEmail, CauseId, Amount) VALUES('
-        + userDare.dareId + ', "' + userDare.senderEmail + '", "' + userDare.receiverEmail
+    var query = 'insert into UserDares (DareId, SenderEmail, ReceiverEmail, CauseId, Amount) VALUES('
+        + userDare.dareId + ', "' + userDare.senderEmail + '", "' + userDare.receiverEmail + '", '
         + userDare.causeId + ', ' + userDare.amount + ')';
 
     client.query(query, function(error, result) {
@@ -185,5 +185,8 @@ module.exports = {
     getDare: getDare,
     getReceivedDares: getReceivedDares,
     getSentDares: getSentDares,
+    getActiveDares: getActiveDares,
+    getPendingDares: getPendingDares,
+    getCompletedDares: getCompletedDares,
     dareUser: dareUser
 };

@@ -224,7 +224,7 @@ app.get('/users/:receiverEmail/:dareId/:senderEmail/:causeId/:amount', function(
         }
 
         // Sends an email to the challengee.
-        contactService.sendEmail(receiver.email, 'You have been challenged!',
+        contactService.sendEmail(userDare.receiverEmail, 'You have been challenged!',
             'Someone has just challenged you! Log into http://hi-dare.com/ to see your challenges.');
 
         responseHelper.sendResponse(res);
