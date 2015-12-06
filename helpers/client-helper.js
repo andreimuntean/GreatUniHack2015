@@ -10,7 +10,7 @@ var client = mysql.createConnection({
 });
  
 // The client is automatically replaced if it is disconnected.
-function replaceClientOnDisconnect(connection) {
+function replaceClientOnDisconnect(client) {
     client.on('error', function(error) {
         if (!error.fatal) {
             return;

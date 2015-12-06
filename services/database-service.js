@@ -83,7 +83,7 @@ var getDare = function(callback, id) {
 };
 
 var getReceivedDares = function(callback, email) {
-    var query = 'select * from UserDares where ReceiverEmail = "' + email + '"';
+    var query = 'select * from UserDares join Dares on UserDares.DareId = Dares.Id where ReceiverEmail = "' + email + '"';
 
     client.query(query, function(error, result) {
         if (!error) {
@@ -99,7 +99,7 @@ var getReceivedDares = function(callback, email) {
 };
 
 var getSentDares = function(callback, email) {
-    var query = 'select * from UserDares where SenderEmail = "' + email + '"';
+    var query = 'select * from UserDares join Dares on UserDares.DareId = Dares.Id where SenderEmail = "' + email + '"';
 
     client.query(query, function(error, result) {
         if (!error) {
@@ -115,7 +115,7 @@ var getSentDares = function(callback, email) {
 };
 
 var getActiveDares = function(callback, email) {
-    var query = 'select * from UserDares where (SenderEmail = "' + email + '" or ReceiverEmail = "' + email + '")'
+    var query = 'select * from UserDares join Dares on UserDares.DareId = Dares.Id where (SenderEmail = "' + email + '" or ReceiverEmail = "' + email + '")'
         + ' and Status = 0';
 
     client.query(query, function(error, result) {
@@ -132,7 +132,7 @@ var getActiveDares = function(callback, email) {
 };
 
 var getPendingDares = function(callback, email) {
-    var query = 'select * from UserDares where (SenderEmail = "' + email + '" or ReceiverEmail = "' + email + '")'
+    var query = 'select * from UserDares join Dares on UserDares.DareId = Dares.Id where (SenderEmail = "' + email + '" or ReceiverEmail = "' + email + '")'
         + ' and Status = 1';
 
     client.query(query, function(error, result) {
@@ -149,7 +149,7 @@ var getPendingDares = function(callback, email) {
 };
 
 var getCompletedDares = function(callback, email) {
-    var query = 'select * from UserDares where (SenderEmail = "' + email + '" or ReceiverEmail = "' + email + '")'
+    var query = 'select * from UserDares join Dares on UserDares.DareId = Dares.Id where (SenderEmail = "' + email + '" or ReceiverEmail = "' + email + '")'
         + ' and Status = 2';
 
     client.query(query, function(error, result) {

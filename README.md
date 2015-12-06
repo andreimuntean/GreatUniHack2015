@@ -1,2 +1,2 @@
-# HackNotts2015
-The backend of our HackNotts 2015 application.
+# HiDare
+The backend of our GreatUniHack 2015 application.
