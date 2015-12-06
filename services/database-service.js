@@ -181,7 +181,7 @@ var dareUser = function(callback, userDare) {
 
 var updateEvidence = function(callback, id, value) {
     var query = 'update UserDares set Evidence = "' + decodeURI(value) + '" where UserDareId = ' + id;
-
+console.log(query);
     client.query(query, function(error, result) {
         callback(error);
     });
