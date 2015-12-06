@@ -175,7 +175,7 @@ var dareUser = function(callback, userDare) {
         + userDare.causeId + ', ' + userDare.amount + ')';
 
     client.query(query, function(error, result) {
-        callback(error);
+        callback(error, result.insertId);
     });
 };
 

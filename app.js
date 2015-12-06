@@ -222,7 +222,7 @@ app.get('/users/:receiverEmail/:dareId/:senderEmail/:causeId/:amount', function(
         'amount': req.params.amount
     };
 
-    databaseService.dareUser(function(error) {
+    databaseService.dareUser(function(error, id) {
         if (error) {
             responseHelper.sendResponse(res, null, 500);
 
@@ -233,7 +233,7 @@ app.get('/users/:receiverEmail/:dareId/:senderEmail/:causeId/:amount', function(
         contactService.sendEmail(userDare.receiverEmail, 'You have been challenged!',
             'Someone has just challenged you! Log into http://hi-dare.com/ to see your challenges.');
 
-        responseHelper.sendResponse(res);
+        responseHelper.sendResponse(res, { 'id': id });
     }, userDare);
 });
 
